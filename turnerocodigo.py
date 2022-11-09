@@ -5,13 +5,16 @@ filaTurnos = []
 def creaTurno(nombre):
  global filaTurnos
  filaTurnos.append(nombre)
+ print("creando turno")
+ time.sleep(1)
  return len(filaTurnos)
 
 
 def atenderPaciente(turno):
     global filaTurnos
     mostrar()
-    print("llamando al paciente ", filaTurnos[int(turno)])
+    print("llamando al paciente \n", filaTurnos[int(turno)])
+    time.sleep(1)
     filaTurnos.pop(int(turno))
     print("Restan atender : ")
     mostrar()
@@ -19,7 +22,8 @@ def atenderPaciente(turno):
 
 def mostrar():
     for i in range(len(filaTurnos)):
-        print("el paciente ", filaTurnos[i], " con el turno ",i)
+        print(" - el paciente ", filaTurnos[i], " con el turno - ",i+1,"\n")
+        time.sleep(1)
 inicio = True
 
 # ---------------------- INICIAMOS EL MAIN LOOP ----------------------
@@ -31,16 +35,20 @@ while inicio :
     4 - salir
 """)
 # ---------------------- CONDICIONAL DE OPCIONES  ----------------------
-    if int(op) == 1:
+    if op == str(1):
         paciente = input("Ingrese el nombre del paciente ")
         id = creaTurno(paciente)
-        print("El turno registrado es el ", id, "con el nombre ", paciente)
-    if int(op) == 2:
-        turn = input("Seleccione el numero de paciente ")
-        atenderPaciente(turn)
-    if int(op) == 3:
+        print("El turno registrado a nombre de ",paciente," con el numero ",id)
+    if op == str(2):
         mostrar()
-    if int(op) == 4:
+        turn = input("Seleccione el numero de paciente ")
+        turno=int(turn)
+        atenderPaciente(turno-1)
+    if op == str(3):
+        mostrar()
+    if op == str(4):
         print("Saliendo...")
         time.sleep(2)
         inicio = False
+    if op != str(1) and op != str(2) and op != str(3) and op != str(4):
+        print("la opcion es incorrecta, por favor reingrese su opcion con un numero del 1 al 4 \n")
